@@ -159,7 +159,8 @@ func main() {
 
         cmd.Command(VOLM_ALIAS, "set a channel's volume", func(cmd *cli.Cmd) {
             val := Float32Arg(0)
-            cmd.VarOpt("val v", &val, "value")
+            cmd.VarArg("VAL", &val, "value")
+            cmd.Spec = "-- VAL"
 
             cmd.Action = func() {
                 port.SetVol(float32(val))
@@ -168,10 +169,10 @@ func main() {
         })
         cmd.Command(BALN_ALIAS, "set a channel's balance", func(cmd *cli.Cmd) {
             val := Float32Arg(0)
-            cmd.VarOpt("val v", &val, "value")
+            cmd.VarArg("VAL", &val, "value")
+            cmd.Spec = "-- VAL"
 
             cmd.Action = func() {
-                fmt.Println(float32(val))
                 port.SetBal(float32(val))
                 fmt.Println(port.Bal)
             }
